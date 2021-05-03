@@ -1,0 +1,25 @@
+/*
+Here we have four main properties to underline:
+
+outDir: tells the compiler to put the compiled code into the dist/js folder.
+
+rootDir: informs TypeScript to compile every .ts file located in the src folder.
+
+include: tells the compiler to include files that are in the src directory and sub-directory.
+
+exclude: will exclude the files or folders passed in the array during compile-time.
+*/
+
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist/js",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/types/*.ts", "node_modules", ".vscode"]
+}
