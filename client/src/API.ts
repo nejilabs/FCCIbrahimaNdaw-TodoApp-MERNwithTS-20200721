@@ -18,6 +18,11 @@ export const getTodos = async (): Promise<AxiosResponse<ApiDataType>> => {
   }
 }
 
+/**
+ * @description addTodo - receives data entered by the user as an argument, then returns a promise. Then we omit the _id property because MongoDB will create it on the fly.
+ * @param formData 
+ * @returns 
+ */
 export const addTodo = async (
   formData: ITodo
 ): Promise<AxiosResponse<ApiDataType>> => {
@@ -32,6 +37,46 @@ export const addTodo = async (
       todo
     )
     return saveTodo
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+/**
+ * @description updateTodo - we pass in the updated data and the _id of the object. Then we change the status of the Todo.
+ * @param todo 
+ * @returns 
+ */
+export const updateTodo = async (
+  todo: ITodo
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const todoUpdate: Pick<ITodo, "status"> = {
+      status: true,
+    }
+    const updatedTodo: AxiosResponse<ApiDataType> = await axios.put(
+      `${baseUrl}/edit-todo/${todo._id}`,
+      todoUpdate
+    )
+    return updatedTodo
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+/**
+ * @description deleteTodo - receives a parameter _id and returns a promise.
+ * @param _id 
+ * @returns 
+ */
+export const deleteTodo = async (
+  _id: string
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const deletedTodo: AxiosResponse<ApiDataType> = await axios.delete(
+      `${baseUrl}/delete-todo/${_id}`
+    )
+    return deletedTodo
   } catch (error) {
     throw new Error(error)
   }
